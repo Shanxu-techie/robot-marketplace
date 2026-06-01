@@ -1,74 +1,61 @@
 'use client'
 
 import { useState } from 'react'
+import { Button } from './ui/button'
 
 export default function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border p-4">
       <div className="flex justify-between items-center">
         <div>Logo</div>
         <div className="hidden md:flex items-center gap-6">
           <a
             href="#"
             title="Home"
-            className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+            className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
           >
             Home
           </a>
           <a
             href="#"
             title="Marketplace"
-            className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+            className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
           >
             Marketplace
           </a>
           <a
             href="#"
             title="About"
-            className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+            className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
           >
             About
           </a>
           <a
             href="#"
             title="Pricing"
-            className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+            className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
           >
             Pricing
           </a>
           <a
             href="#"
             title="Contact"
-            className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+            className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
           >
             Contact
           </a>
           {!loggedIn ? (
             <>
-              <button
-                onClick={() => setLoggedIn(true)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Sign in
-              </button>
-              <button className="border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition">
-                Sign up
-              </button>
+              <Button onClick={() => setLoggedIn(true)}>Sign in</Button>
+              <Button variant="outline">Sign up</Button>
             </>
           ) : (
             <>
-              <button className="border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition">
-                Profile
-              </button>
-              <button
-                onClick={() => setLoggedIn(false)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
+              <Button variant="outline">Profile</Button>
+              <Button onClick={() => setLoggedIn(false)}>Logout</Button>
             </>
           )}
         </div>
@@ -89,7 +76,7 @@ export default function Navbar() {
             <a
               href="#"
               title="Home"
-              className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+              className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
             >
               Home
             </a>
@@ -98,7 +85,7 @@ export default function Navbar() {
             <a
               href="#"
               title="Marketplace"
-              className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+              className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
             >
               Marketplace
             </a>
@@ -107,7 +94,7 @@ export default function Navbar() {
             <a
               href="#"
               title="About"
-              className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+              className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
             >
               About
             </a>
@@ -116,7 +103,7 @@ export default function Navbar() {
             <a
               href="#"
               title="Pricing"
-              className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+              className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
             >
               Pricing
             </a>
@@ -125,7 +112,7 @@ export default function Navbar() {
             <a
               href="#"
               title="Contact"
-              className="hover:text-red-500 hover:bg-gray-700 transition px-4 py-2 rounded"
+              className="hover:text-primary hover:bg-muted transition px-4 py-2 rounded"
             >
               Contact
             </a>
@@ -134,27 +121,13 @@ export default function Navbar() {
         <div className="flex flex-col gap-2 mt-4 items-start">
           {!loggedIn ? (
             <>
-              <button
-                onClick={() => setLoggedIn(true)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Sign in
-              </button>
-              <button className="border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition">
-                Sign up
-              </button>
+              <Button onClick={() => setLoggedIn(true)}>Sign in</Button>
+              <Button variant="outline">Sign up</Button>
             </>
           ) : (
             <>
-              <button className="border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition">
-                Profile
-              </button>
-              <button
-                onClick={() => setLoggedIn(false)}
-                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
-              >
-                Logout
-              </button>
+              <Button variant="outline">Profile</Button>
+              <Button onClick={() => setLoggedIn(false)}>Logout</Button>
             </>
           )}
         </div>
