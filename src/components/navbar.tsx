@@ -11,7 +11,7 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border p-4">
       <div className="flex justify-between items-center">
         <div>Logo</div>
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-2">
           <a
             href="#"
             title="Home"
@@ -71,7 +71,7 @@ export default function Navbar() {
       </div>
 
       <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:hidden mt-4`}>
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-2">
           <li>
             <a
               href="#"
