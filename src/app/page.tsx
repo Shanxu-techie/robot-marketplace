@@ -1,5 +1,6 @@
 import FeaturedRobots from '@/components/featured-robots'
 import Hero from '@/components/hero'
+import HowItWorks from '@/components/how-it-works'
 import Navbar from '@/components/navbar'
 import Trust from '@/components/trust'
 import TwoPaths from '@/components/two-paths'
@@ -12,6 +13,7 @@ export default function Home() {
       <TwoPaths />
       <Trust />
       <FeaturedRobots />
+      <HowItWorks />
     </div>
   )
 }
