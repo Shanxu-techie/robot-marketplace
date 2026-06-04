@@ -1,3 +1,4 @@
+import CtaBanner from '@/components/cta-banner'
 import FeaturedRobots from '@/components/featured-robots'
 import Hero from '@/components/hero'
 import HowItWorks from '@/components/how-it-works'
@@ -14,6 +15,7 @@ export default function Home() {
       <Trust />
       <FeaturedRobots />
       <HowItWorks />
+      <CtaBanner />
     </div>
   )
 }
