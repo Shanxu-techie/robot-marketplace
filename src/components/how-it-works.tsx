@@ -36,7 +36,7 @@ export default function HowItWorks() {
   return (
     <div className="container mx-auto p-8">
       <SectionHeading title="How It Works" />
-      <div className="relative my-8 min-h-150">
+      <div className="relative my-8">
         <Image
           src="https://placehold.co/1920x600/png?text=How+It+Works+Image"
           alt="How It Works"
