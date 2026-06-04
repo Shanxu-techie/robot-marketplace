@@ -23,7 +23,7 @@ export default function RobotCard({
         className="w-full object-cover"
       />
 
-      <div className="flex flex-col flex-1 p-4">
+      <div className="flex flex-col flex-1 p-4 backdrop-blur-md bg-muted/40">
         <div className="flex-1">
           <div className="flex flex-col gap-2">
             <p className="text-sm font-bold text-primary">{category}</p>
