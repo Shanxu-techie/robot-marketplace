@@ -18,7 +18,7 @@ export const robots: Robot[] = [
     oneLiner: 'High-throughput autonomous lifting for warehouse floors',
     standout: '120 picks/hour',
     price: 'From $18,000',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
   {
     id: 'rbt-002',
@@ -28,7 +28,7 @@ export const robots: Robot[] = [
     oneLiner: 'Autonomous delivery robot for hospitals and clinics',
     standout: '99.2% delivery accuracy',
     price: 'From $12,500',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
   {
     id: 'rbt-003',
@@ -38,7 +38,7 @@ export const robots: Robot[] = [
     oneLiner: 'AI-powered floor cleaning for hotels and large spaces',
     standout: '3,000 sq ft/hour coverage',
     price: 'From $6,800',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
   {
     id: 'rbt-004',
@@ -48,7 +48,7 @@ export const robots: Robot[] = [
     oneLiner: 'Smart food delivery robot for high-traffic dining areas',
     standout: 'Carries up to 40 kg per trip',
     price: 'From $9,200',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
   {
     id: 'rbt-005',
@@ -58,7 +58,7 @@ export const robots: Robot[] = [
     oneLiner: 'Precision inspection robot for quality control lines',
     standout: 'Detects defects at 0.02 mm accuracy',
     price: 'From $22,000',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
   {
     id: 'rbt-006',
@@ -68,6 +68,6 @@ export const robots: Robot[] = [
     oneLiner: 'Autonomous patrol robot with real-time threat detection',
     standout: '360° AI vision monitoring',
     price: 'From $15,500',
-    imageUrl: '/placeholder.svg',
+    imageUrl: 'https://placehold.co/400x225/png',
   },
 ]
