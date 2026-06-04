@@ -36,16 +36,16 @@ export default function HowItWorks() {
   return (
     <div className="container mx-auto p-8">
       <SectionHeading title="How It Works" />
-      <div className="relative my-8">
-        <Image
+      <div className="relative bg-cover bg-center my-8 rounded-lg" style={{backgroundImage: 'url(https://placehold.co/1920x600/png)'}}>
+        {/* <Image
           src="https://placehold.co/1920x600/png?text=How+It+Works+Image"
           alt="How It Works"
           width={1920}
           height={600}
           className="w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-background/80 z-1"></div>
-        <div className="absolute inset-0 z-2 grid grid-cols-1 md:grid-cols-4 gap-6 py-8 px-4">
+        /> */}
+        <div className="absolute inset-0 bg-background/80 z-1 rounded-lg"></div>
+        <div className="relative z-2 grid grid-cols-1 md:grid-cols-4 gap-6 py-8 px-4">
           {steps.map((step) => (
             <div
               key={step.number}
