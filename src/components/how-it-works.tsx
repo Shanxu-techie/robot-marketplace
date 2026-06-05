@@ -1,5 +1,4 @@
 import SectionHeading from './section-heading'
-import Image from 'next/image'
 
 type Steps = {
   number: number
