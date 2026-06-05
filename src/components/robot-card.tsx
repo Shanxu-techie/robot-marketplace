@@ -11,7 +11,7 @@ export default function RobotCard({
   standout,
   price,
   imageUrl,
-  slug
+  slug,
 }: Robot) {
   return (
     <div className="flex flex-col h-full border border-border rounded-lg overflow-hidden">
@@ -44,11 +44,11 @@ export default function RobotCard({
             </div>
           </div>
         </div>
-        <Link href={`/marketplace/${slug}`}>
-          <Button variant="outline" className="w-full text-primary mt-4">
+        <Button variant="outline" asChild className="w-full text-primary mt-4">
+          <Link href={`/marketplace/${slug}`}>
             View Details <ArrowRight />
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
     </div>
   )
