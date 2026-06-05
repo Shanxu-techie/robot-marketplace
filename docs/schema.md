@@ -84,3 +84,14 @@
 - status
 - created_at
 - updated_at
+
+## testimonials
+- id
+- company_name
+- contact_name
+- contact_title
+- content
+- is_visible
+- sort_order
+- created_at
+- updated_at
