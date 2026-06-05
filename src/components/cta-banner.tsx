@@ -10,7 +10,7 @@ export default function CtaBanner() {
           Speak with our robotics specialists and find the right solution for
           your business.
         </p>
-        <Button variant="ctaOutline" className='mt-8 border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent'>Request a Consultation <ArrowRight /></Button>
+        <Button variant="ctaOutline" className='mt-8'>Request a Consultation <ArrowRight /></Button>
       </div>
     </div>
   )
