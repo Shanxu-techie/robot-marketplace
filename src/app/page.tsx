@@ -1,5 +1,6 @@
 import CtaBanner from '@/components/cta-banner'
 import FeaturedRobots from '@/components/featured-robots'
+import Footer from '@/components/footer'
 import Hero from '@/components/hero'
 import HowItWorks from '@/components/how-it-works'
 import Navbar from '@/components/navbar'
@@ -16,6 +17,7 @@ export default function Home() {
       <FeaturedRobots />
       <HowItWorks />
       <CtaBanner />
+      <Footer />
     </div>
   )
 }
