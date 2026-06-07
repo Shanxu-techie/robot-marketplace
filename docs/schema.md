@@ -90,8 +90,11 @@
 - company_name
 - contact_name
 - contact_title
+- company_logo_url
+- rating
 - content
 - is_visible
 - sort_order
 - created_at
 - updated_at
+<!-- add bounds to rating -->
