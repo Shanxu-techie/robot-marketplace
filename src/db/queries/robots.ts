@@ -2,7 +2,7 @@ import { RobotsQuery } from '@/lib/validators/robots'
 import { RobotCard } from '@/types/robots'
 import { and, eq } from 'drizzle-orm'
 import { robots, categories, vendors, robotImages } from '@/db/schema'
-import { db } from '@/db'
+import { getDb } from '@/db'
 
 export async function getRobots(params: RobotsQuery): Promise<RobotCard[]> {
   const conditions = [eq(robots.isVisible, true)]
@@ -12,6 +12,7 @@ export async function getRobots(params: RobotsQuery): Promise<RobotCard[]> {
   if (params.category) {
     conditions.push(eq(categories.slug, params.category))
   }
+  const db = getDb()
   const rows = await db
     .select({
       id: robots.id,

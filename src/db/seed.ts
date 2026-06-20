@@ -1,4 +1,4 @@
-import { db } from '@/db/index'
+import { getDb } from '@/db'
 import type { InferInsertModel } from 'drizzle-orm'
 
 import {
@@ -13,7 +13,7 @@ import {
 } from '@/db/schema'
 
 async function main() {
-  
+    const db = getDb()
     await db.delete(robotImages)
     await db.delete(robotSpecifications)
     await db.delete(inquiries)
