@@ -1,3 +1,4 @@
+import { eq } from 'drizzle-orm'
 import {
   pgTable,
   serial,
@@ -7,6 +8,7 @@ import {
   boolean,
   integer,
   pgEnum,
+  index,
 } from 'drizzle-orm/pg-core'
 
 export const categories = pgTable('categories', {
@@ -30,26 +32,34 @@ export const vendors = pgTable('vendors', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
-export const robots = pgTable('robots', {
-  id: serial('id').primaryKey(),
-  vendorId: integer('vendor_id')
-    .notNull()
-    .references(() => vendors.id, { onDelete: 'restrict' }),
-  categoryId: integer('category_id')
-    .notNull()
-    .references(() => categories.id, { onDelete: 'restrict' }),
-  name: text('name').notNull(),
-  slug: text('slug').notNull().unique(),
-  shortDescription: text('short_description'),
-  fullDescription: text('full_description'),
-  priceFrom: numeric('price_from'),
-  priceTo: numeric('price_to'),
-  keyMetric: text('key_metric'),
-  featured: boolean('featured').default(false).notNull(),
-  isVisible: boolean('is_visible').default(true).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-})
+export const robots = pgTable(
+  'robots',
+  {
+    id: serial('id').primaryKey(),
+    vendorId: integer('vendor_id')
+      .notNull()
+      .references(() => vendors.id, { onDelete: 'restrict' }),
+    categoryId: integer('category_id')
+      .notNull()
+      .references(() => categories.id, { onDelete: 'restrict' }),
+    name: text('name').notNull(),
+    slug: text('slug').notNull().unique(),
+    shortDescription: text('short_description'),
+    fullDescription: text('full_description'),
+    priceFrom: numeric('price_from'),
+    priceTo: numeric('price_to'),
+    keyMetric: text('key_metric'),
+    featured: boolean('featured').default(false).notNull(),
+    isVisible: boolean('is_visible').default(true).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  },
+  (table) => [
+    index('idx_robots_category_featured')
+      .on(table.categoryId, table.featured)
+      .where(eq(table.isVisible, true)),
+  ]
+)
 
 export const robotImages = pgTable('robot_images', {
   id: serial('id').primaryKey(),
