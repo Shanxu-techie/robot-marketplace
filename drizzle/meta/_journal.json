@@ -8,6 +8,20 @@
       "when": 1780831815057,
       "tag": "0000_same_thaddeus_ross",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1782503618718,
+      "tag": "0001_powerful_namorita",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1782504652423,
+      "tag": "0002_moaning_raza",
+      "breakpoints": true
     }
   ]
 }

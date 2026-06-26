@@ -5,7 +5,7 @@ export const userRoleEnum = pgEnum('user_role', ['buyer', 'admin'])
 export const users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
   clerkUserId: text('clerk_user_id').notNull().unique(),
-  email: text('email').notNull().unique(),
+  email: text('email').notNull(),
   role: userRoleEnum('role').default('buyer').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true })
     .defaultNow()
