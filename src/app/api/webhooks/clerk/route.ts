@@ -77,8 +77,8 @@ export async function POST(req: NextRequest) {
       if (!primaryEmail) {
         console.error('User has no primary email:', clerkUserId)
         return NextResponse.json(
-          { error: 'User data missing email' },
-          { status: 400 }
+          { received: true, skipped: 'missing primary email' },
+          { status: 200 }
         )
       }
 
