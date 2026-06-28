@@ -5,8 +5,10 @@ import {
   timestamp,
   integer,
   pgEnum,
+  uuid,
 } from 'drizzle-orm/pg-core'
 import { robots } from './robots'
+import { users } from './users'
 
 export const inquiryStatusEnum = pgEnum('inquiry_status', [
   'new',
@@ -19,14 +21,22 @@ export const inquiries = pgTable('inquiries', {
   robotId: integer('robot_id').references(() => robots.id, {
     onDelete: 'set null',
   }),
+  userId: uuid('user_id')
+    .references(() => users.id, { onDelete: 'restrict' })
+    .notNull(),
   companyName: text('company_name').notNull(),
   contactName: text('contact_name').notNull(),
   email: text('email').notNull(),
   phone: text('phone'),
   message: text('message').notNull(),
   status: inquiryStatusEnum('status').default('new').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .defaultNow()
+    .notNull()
+    .$onUpdateFn(() => new Date()),
 })
 
 export const customRequestStatusEnum = pgEnum('custom_request_status', [
@@ -41,6 +51,9 @@ export const customRequestStatusEnum = pgEnum('custom_request_status', [
 
 export const customRequests = pgTable('custom_requests', {
   id: serial('id').primaryKey(),
+  userId: uuid('user_id')
+    .references(() => users.id, { onDelete: 'restrict' })
+    .notNull(),
   companyName: text('company_name').notNull(),
   contactName: text('contact_name').notNull(),
   email: text('email').notNull(),
@@ -49,6 +62,11 @@ export const customRequests = pgTable('custom_requests', {
   budget: text('budget').notNull(),
   requirements: text('requirements').notNull(),
   status: customRequestStatusEnum('status').default('new').notNull(),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true })
+    .defaultNow()
+    .notNull()
+    .$onUpdateFn(() => new Date()),
 })
