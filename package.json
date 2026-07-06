@@ -33,6 +33,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@clerk/testing": "^2.2.2",
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^22",
     "@types/react": "^19",
