@@ -29,7 +29,11 @@ export default async function Dashboard() {
       ) : (
         <ul className="space-y-2">
           {userInquiries.map((userInquiry) => (
-            <li key={userInquiry.id} className="border-b pb-2">
+            <li
+              key={userInquiry.id}
+              data-testid="inquiry-item"
+              className="border-b pb-2"
+            >
               <p className="font-medium">{userInquiry.companyName}</p>
               <p className="text-sm text-gray-500">{userInquiry.email}</p>
             </li>
