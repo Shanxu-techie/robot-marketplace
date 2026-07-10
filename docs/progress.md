@@ -728,6 +728,12 @@ No implementation change is planned until production usage data exists.
 
 Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
 
+### Documentation
+
+- **ADR organization:** Evaluate moving Architecture Decision Records into a dedicated `docs/decisions/` directory as the number of ADRs grows, keeping `PROGRESS.md` focused on project status while preserving ADR discoverability.
+
+  **Review Trigger:** Revisit once the project reaches approximately 10+ ADRs or `PROGRESS.md` becomes difficult to navigate due to ADR length.
+
 # Key Learnings
 
 ## Phase 2
