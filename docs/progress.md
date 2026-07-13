@@ -4,50 +4,51 @@
 
 B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solutions. Users browse ready-made robots or configure custom robots. The platform targets businesses purchasing robotics solutions while providing an administrative backend for inquiries, orders, contracts, and receipts.
 
-**Repository:** https://github.com/Shanxu-techie/robot-marketplace
+**Repository:** <https://github.com/Shanxu-techie/robot-marketplace>
 
-**Deployment**
+### Deployment
+
 - Frontend: Vercel
 - Database: Neon (Postgres)
 
 ---
 
-# Stack
+## Stack
 
-| Layer | Choice |
-|--------|--------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Components | shadcn/ui |
-| Database | Neon (Serverless Postgres) |
-| ORM | Drizzle ORM + drizzle-kit |
-| Authentication | Clerk |
-| Testing | Vitest (Unit + Integration), Playwright (E2E) |
-| CI/CD | GitHub Actions |
-| Containers | Docker + Docker Compose |
-| Hosting | Vercel |
-| AI | Vercel AI SDK (Phase 4) |
-
----
-
-# Phase Status
-
-| Phase | Status |
-|--------|--------|
-| Phase 0 — Environment Setup | ✅ Complete |
-| Phase 1 — Landing Page | ✅ Complete |
-| Phase 2 — Database + API + Docker + CI | ✅ Complete |
-| Phase 3 — Authentication + Security | ✅ Complete |
-| Phase 4 — Payments + AI | 🔄 In Progress |
-| Phase 5 — Production + System Design | ⬜ Not Started |
-| Phase 6 — Capstone | ⬜ Not Started |
+| Layer          | Choice                                        |
+| -------------- | --------------------------------------------- |
+| Framework      | Next.js 16 (App Router)                       |
+| Language       | TypeScript                                    |
+| Styling        | Tailwind CSS                                  |
+| Components     | shadcn/ui                                     |
+| Database       | Neon (Serverless Postgres)                    |
+| ORM            | Drizzle ORM + drizzle-kit                     |
+| Authentication | Clerk                                         |
+| Testing        | Vitest (Unit + Integration), Playwright (E2E) |
+| CI/CD          | GitHub Actions                                |
+| Containers     | Docker + Docker Compose                       |
+| Hosting        | Vercel                                        |
+| AI             | Vercel AI SDK (Phase 4)                       |
 
 ---
 
-# Phase 0 — Environment Setup ✅
+## Phase Status
 
-## Deliverables
+| Phase                                  | Status         |
+| -------------------------------------- | -------------- |
+| Phase 0 — Environment Setup            | ✅ Complete    |
+| Phase 1 — Landing Page                 | ✅ Complete    |
+| Phase 2 — Database + API + Docker + CI | ✅ Complete    |
+| Phase 3 — Authentication + Security    | ✅ Complete    |
+| Phase 4 — Payments + AI                | 🔄 In Progress |
+| Phase 5 — Production + System Design   | ⬜ Not Started |
+| Phase 6 — Capstone                     | ⬜ Not Started |
+
+---
+
+## Phase 0 — Environment Setup ✅
+
+### Deliverables
 
 - Node.js, Git and SSH configured
 - Next.js 16 project initialized
@@ -60,11 +61,11 @@ B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solu
 
 ---
 
-# Phase 1 — Landing Page ✅
+## Phase 1 — Landing Page ✅
 
-## Deliverables
+### Deliverables
 
-### Design System
+#### Design System
 
 - OKLCH-based design tokens
 - Dark-first theme
@@ -73,7 +74,7 @@ B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solu
 - Reusable SectionHeading component
 - Custom `ctaOutline` button variant
 
-### Components
+#### Components
 
 - Responsive Navbar
 - Hero
@@ -84,13 +85,13 @@ B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solu
 - CTA Banner
 - Footer
 
-### Data Layer
+#### Data Layer
 
 - Typed robot data
 - RobotCard component
 - Featured robots section
 
-### Engineering Decisions
+#### Engineering Decisions
 
 - Glassmorphism navigation
 - Design tokens instead of hardcoded colors
@@ -99,11 +100,11 @@ B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solu
 
 ---
 
-# Phase 2 — Database + API + Docker + CI ✅
+## Phase 2 — Database + API + Docker + CI ✅
 
-## Deliverables
+### Deliverables
 
-### Database
+#### Database
 
 - Drizzle schema
 - 8 tables
@@ -113,7 +114,7 @@ B2B Next.js 16 platform for browsing, buying, and requesting custom robotic solu
 - Composite partial index
 - Idempotent seed script
 
-### API
+#### API
 
 Implemented:
 
@@ -129,7 +130,7 @@ Features:
 - Primary image selection
 - Visibility enforcement
 
-### Testing
+#### Testing
 
 Vitest configured.
 
@@ -145,7 +146,7 @@ Testing conventions established:
 - Unit/integration tests co-located with source
 - Playwright reserved exclusively for E2E
 
-### Docker
+#### Docker
 
 - Three-stage Dockerfile
 - Docker Compose
@@ -154,7 +155,7 @@ Testing conventions established:
 - Correct file ownership using `--chown`
 - Verified against live Neon database
 
-### CI/CD
+#### CI/CD
 
 GitHub Actions workflow:
 
@@ -165,7 +166,7 @@ GitHub Actions workflow:
 - `npm ci`
 - Lockfile verification
 
-### Performance
+#### Performance
 
 Composite partial index:
 
@@ -180,7 +181,7 @@ Optimized for:
 - Featured filtering
 - Visible robots only
 
-### Engineering Decisions
+#### Engineering Decisions
 
 - Lazy `getDb()` initialization
 - Query layer extracted from routes
@@ -189,15 +190,17 @@ Optimized for:
 - Node 22 adopted across local, Docker and CI
 - Drizzle partial-index code generation manually verified before migration
 
-# Phase 3 — Authentication + Security ✅
+---
 
-## Deliverables
+## Phase 3 — Authentication + Security ✅
 
-### Schema Modularization
+### Deliverables
+
+#### Schema Modularization
 
 Schema split into domain-based files:
 
-```
+```text
 src/db/schema/
 ├── users.ts
 ├── robots.ts
@@ -216,7 +219,7 @@ Completed:
 
 ---
 
-### Users
+#### Users
 
 - UUID primary key (`defaultRandom()`)
 - `clerkUserId` (unique external identity)
@@ -226,19 +229,19 @@ Completed:
 
 ---
 
-### Authentication Architecture
+#### Authentication Architecture
 
 Implemented authentication-provider indirection.
 
 Internal relationships reference:
 
-```
+```text
 users.id
 ```
 
 Never:
 
-```
+```text
 clerkUserId
 ```
 
@@ -249,7 +252,7 @@ Benefits:
 
 ---
 
-### Clerk Integration
+#### Clerk Integration
 
 Completed:
 
@@ -257,25 +260,23 @@ Completed:
 - `proxy.ts` replaces `middleware.ts` in Next.js 16
 - Public-by-default routing strategy
 - Protected routes:
-
   - `/dashboard`
   - `/profile`
   - `/orders`
   - `/requests`
   - `/favorites`
   - `/admin`
-
 - Sign-in page
 - Sign-up page
 - Redirect environment variables configured
 
 ---
 
-### Clerk Webhooks
+#### Clerk Webhooks
 
 Implemented:
 
-```
+```text
 src/app/api/webhooks/clerk/route.ts
 ```
 
@@ -284,24 +285,20 @@ Features:
 - Svix signature verification
 - Raw body verification
 - Primary email lookup using `primary_email_address_id`
-- Idempotent inserts via
-
-```
-onConflictDoNothing()
-```
+- Idempotent inserts via `onConflictDoNothing()`
 
 Response strategy:
 
-| Condition | Response |
-|-----------|----------|
-| Invalid signature | 400 |
-| Missing headers | 400 |
-| Missing primary email | 200 |
-| Unknown event | 200 |
+| Condition             | Response |
+| --------------------- | -------- |
+| Invalid signature     | 400      |
+| Missing headers       | 400      |
+| Missing primary email | 200      |
+| Unknown event         | 200      |
 
 Verified:
 
-```
+```text
 Sign Up
 → Clerk
 → Webhook
@@ -310,17 +307,17 @@ Sign Up
 
 ---
 
-### Row-Level Authorization
+#### Row-Level Authorization
 
 Implemented:
 
-```
+```text
 src/lib/auth.ts
 ```
 
 `getCurrentUser()`:
 
-- server-only
+- `server-only`
 - Guards directly on `!userId`
 - Returns internal user record
 - Returns `null` for unauthenticated requests or webhook race conditions
@@ -340,7 +337,7 @@ Database:
 - `onDelete: 'restrict'`
 - Composite dashboard index:
 
-```
+```text
 (userId, createdAt)
 ```
 
@@ -348,7 +345,7 @@ Authorization enforced at the query layer rather than trusting client input.
 
 ---
 
-### Playwright
+#### Playwright
 
 Infrastructure completed.
 
@@ -362,7 +359,7 @@ Implemented:
 
 ---
 
-### CI Improvements
+#### CI Improvements
 
 Completed:
 
@@ -374,7 +371,7 @@ Completed:
 
 ---
 
-### Infrastructure
+#### Infrastructure
 
 - ngrok configured for webhook development
 - Dynamic `ALLOWED_DEV_ORIGIN`
@@ -383,7 +380,7 @@ Completed:
 
 ---
 
-## Phase 3 Completion Criteria
+### Phase 3 Completion Criteria
 
 Completed:
 
@@ -399,19 +396,21 @@ Current carry-forward:
 - Improve Playwright coverage as additional user flows are implemented
 - Re-evaluate routing strategy if protected surface grows substantially
 
-# Architectural Decision Records (ADR)
+---
 
-## ADR-001 — Auth Provider Indirection
+## Architectural Decision Records (ADR)
 
-### Decision
+### ADR-001 — Auth Provider Indirection
+
+#### Decision
 
 Internal foreign keys reference `users.id`, never `clerkUserId`.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - Reference `clerkUserId` directly throughout the schema.
 
-### Rationale
+#### Rationale
 
 Clerk is an external identity provider, not the application's relational source of truth.
 
@@ -426,9 +425,9 @@ The remainder of the schema and all foreign keys remain unaffected.
 
 ---
 
-## ADR-002 — Public-by-Default Route Protection
+### ADR-002 — Public-by-Default Route Protection
 
-### Decision
+#### Decision
 
 Use `isProtectedRoute` (public-by-default) rather than `isPublicRoute` (protected-by-default).
 
@@ -445,11 +444,11 @@ Current protected routes:
 
 Everything else is public.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - `isPublicRoute` (protected-by-default / fail-closed)
 
-### Rationale
+#### Rationale
 
 The Robot Marketplace MVP is primarily a public catalogue.
 
@@ -481,7 +480,7 @@ This project intentionally accepts the opposite trade-off because:
 - reviewing that matcher during code review is straightforward,
 - the application is overwhelmingly public.
 
-### Review Trigger
+#### Review Trigger
 
 Revisit this decision if any of the following occur:
 
@@ -492,17 +491,17 @@ Revisit this decision if any of the following occur:
 
 ---
 
-## ADR-003 — Lazy Database Initialization
+### ADR-003 — Lazy Database Initialization
 
-### Decision
+#### Decision
 
 Use `getDb()` instead of exporting a module-level database instance.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - Export a global `db` object.
 
-### Rationale
+#### Rationale
 
 Module-scope database initialization caused failures during:
 
@@ -515,13 +514,13 @@ Lazy initialization removes those side effects while maintaining module-level ca
 
 ---
 
-## ADR-004 — `$onUpdateFn()` is a Business Rule
+### ADR-004 — `$onUpdateFn()` is a Business Rule
 
-### Decision
+#### Decision
 
 Apply `$onUpdateFn()` only to tables with genuine update workflows.
 
-### Rationale
+#### Rationale
 
 Not every table represents mutable business data.
 
@@ -535,18 +534,18 @@ These tables are insert/delete oriented and do not require automatic update time
 
 ---
 
-## ADR-005 — Restrict User-Owned Record Deletion
+### ADR-005 — Restrict User-Owned Record Deletion
 
-### Decision
+#### Decision
 
 Use `onDelete: 'restrict'` for every foreign key referencing `users`.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - `CASCADE`
 - `SET NULL`
 
-### Rationale
+#### Rationale
 
 Business records such as inquiries and custom requests must outlive user access.
 
@@ -554,7 +553,7 @@ The database should enforce this invariant rather than relying on application lo
 
 Future user-owned tables follow the same pattern.
 
-### Trade-off
+#### Trade-off
 
 Deleting a user requires explicitly resolving dependent records first.
 
@@ -562,17 +561,17 @@ Applications should implement soft deletion or account deactivation instead of h
 
 ---
 
-## ADR-006 — GitHub Actions Version Pinning Strategy
+### ADR-006 — GitHub Actions Version Pinning Strategy
 
-### Decision
+#### Decision
 
 Use GitHub-maintained major version tags (for example `actions/checkout@v7`) instead of commit SHA pinning.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - Pin every action to an immutable commit SHA.
 
-### Rationale
+#### Rationale
 
 This is an actively developed personal project maintained by a single developer.
 
@@ -584,7 +583,7 @@ Using major version tags:
 
 The operational benefits currently outweigh the additional supply-chain protection provided by SHA pinning.
 
-### Review Trigger
+#### Review Trigger
 
 Revisit if:
 
@@ -595,17 +594,17 @@ Revisit if:
 
 ---
 
-## ADR-007 — No Transaction for E2E Seed Script
+### ADR-007 — No Transaction for E2E Seed Script
 
-### Decision
+#### Decision
 
 Do not wrap `seedE2EInquiries` in a transaction.
 
-### Alternatives Considered
+#### Alternatives Considered
 
 - Wrap the seed process in a single database transaction.
 
-### Rationale
+#### Rationale
 
 The script seeds an isolated CI database.
 
@@ -617,7 +616,7 @@ If a failure occurs:
 
 Because the database is ephemeral and the seed process is idempotent, transactions provide little practical benefit.
 
-### Review Trigger
+#### Review Trigger
 
 Revisit if:
 
@@ -625,9 +624,134 @@ Revisit if:
 - it is reused outside ephemeral CI environments,
 - it becomes part of production or staging deployment workflows.
 
-# Key Learnings
+---
 
-## Phase 2
+### ADR-008 — AI Recommendation Validation Strategy
+
+#### Decision
+
+Validate AI recommendations in two stages:
+
+1. Validate the LLM response against the Zod schema.
+2. Apply business-rule validation to the parsed recommendations.
+
+Recommendations that violate business rules (for example, referencing a `robotId` outside the candidate set) are discarded. Remaining valid recommendations continue through the response pipeline.
+
+If no valid recommendations remain after business validation, treat the AI response as a failure and return the dedicated recommendation error state.
+
+#### Alternatives Considered
+
+##### Fail the entire response if any recommendation is invalid
+
+Rejected.
+
+A single invalid recommendation should not prevent users from receiving other valid recommendations generated in the same response.
+
+##### Accept all recommendations after schema validation
+
+Rejected.
+
+Schema validation cannot verify application-specific business rules such as candidate-set membership. Accepting all recommendations could expose invalid or inconsistent results to users.
+
+#### Rationale
+
+Schema validation and business validation solve different problems.
+
+Zod ensures the AI response matches the expected data contract, but it cannot verify rules that depend on application state. Candidate-set membership, for example, requires knowledge of which robots were actually supplied to the model.
+
+Filtering invalid recommendations allows the system to tolerate occasional LLM mistakes while still returning trustworthy results whenever possible. This improves resilience without compromising data integrity.
+
+The validation strategy intentionally favors graceful degradation. Individual recommendation failures do not invalidate the entire response when trustworthy recommendations remain. The response is treated as a failure only after business validation determines that no valid recommendations remain, at which point the frontend displays the dedicated recommendation error state.
+
+#### Consequences
+
+##### Positive
+
+- More resilient to occasional LLM contract violations.
+- Valid recommendations remain usable even if individual recommendations fail validation.
+- Clear separation between schema validation and business-rule validation.
+- Additional business-rule validators can be added without changing the response schema.
+
+##### Trade-offs
+
+- Response processing requires an additional validation stage.
+- Invalid recommendations are filtered from the final response.
+- Validation failures should be logged to monitor AI quality and identify recurring issues.
+
+#### Future Considerations
+
+Additional business validation rules may be introduced alongside candidate-set validation, including duplicate recommendation detection and other application-specific consistency checks. Each rule should be evaluated independently rather than being coupled to schema validation.
+
+---
+
+## AI Design Notes
+
+### Recommendation UX
+
+- **Recommendation empty/error state:** If no valid recommendations remain after AI response validation (for example, all returned `robotId`s are rejected during candidate-set validation), display a dedicated empty/error state instead of a generic failure message.
+
+**Review Trigger:** Implement as part of the recommendation UI (Phase 4 — Deliverable 5).
+
+---
+
+### AI Observability
+
+- **Centralized AI logging:** `console.error` is an intentional development placeholder. Before production, replace it with a centralized logging solution capable of capturing:
+  - AI contract violations
+  - Token usage
+  - Model/provider errors
+  - AI-specific telemetry
+
+Avoid introducing separate logging mechanisms for individual AI features.
+
+---
+
+### Environment Filtering
+
+- **Environment is currently recommendation context, not a database filter.** Although `environment` is collected as a required input, the current robot catalog does not persist an environment attribute. The value is therefore forwarded to the LLM as required contextual information rather than participating in SQL candidate filtering.
+
+This intentionally separates **business importance** from **database enforceability**: `environment` remains required because it materially affects recommendation quality, even though the current schema cannot filter on it.
+
+**Review Trigger:** Revisit when robot environment becomes a structured catalog attribute or specification normalization enables SQL-based environment filtering.
+
+---
+
+### Recommendation Ranking Strategy
+
+Current recommendation pipeline limits the candidate set (top 15) before sending robots to the LLM.
+
+Current ordering:
+
+1. Closest price to the user's budget
+2. Featured robots (tie-breaker)
+
+- **Budget input evolution:** The current ranking strategy assumes a single target budget and orders candidates by proximity before sending them to the LLM. If the recommendation UI changes to collect budgets as ranges (for example, "Under $5,000", "$5,000–10,000", or "Over $10,000") rather than a single value, both the ranking algorithm and the AI request contract should be revisited together to ensure candidate selection still reflects user intent.
+
+**Review Trigger:** Re-evaluate when the recommendation UI replaces a single budget value with budget ranges or bracket-based input.
+
+#### Design Hypothesis
+
+Ordering primarily by budget proximity may bias recommendations toward mid-range robots while burying lower-cost robots that better satisfy the user's overall requirements.
+
+No implementation change is planned until production usage data exists.
+
+**Review Trigger**
+
+Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
+
+---
+
+### Documentation
+
+- **ADR organization:** Evaluate moving Architecture Decision Records into a dedicated `docs/decisions/` directory as the number of ADRs grows, keeping `PROGRESS.md` focused on project status while preserving ADR discoverability.
+
+**Review Trigger:** Revisit once the project reaches approximately 10+ ADRs or `PROGRESS.md` becomes difficult to navigate due to ADR length.
+
+---
+
+## Key Learnings
+
+### Phase 2
 
 - `npm ci` catches lockfile drift immediately and should be used everywhere automation runs.
 - Avoid `npm audit fix --force`; review breaking changes before accepting them.
@@ -640,7 +764,7 @@ Revisit if:
 
 ---
 
-## Phase 3
+### Phase 3
 
 - Standardize timezone handling project-wide using `{ withTimezone: true }`.
 - Clerk synthetic webhook events are incomplete; validate against real sign-ups.
@@ -662,21 +786,29 @@ Revisit if:
 
 ---
 
-# Deferred / Horizon
+### Phase 4
 
-## Deferred Features
+- Graceful degradation and fail-fast are different failure strategies. Recommendation validation filters individual invalid recommendations and only fails once no trustworthy recommendations remain.
+- Operating environment can be a required recommendation constraint even when it cannot yet participate in SQL filtering. Business importance and database enforceability are separate concerns.
+
+---
+
+## Deferred / Horizon
+
+### Deferred Features
 
 - `specification_definitions` normalization table
 - HowItWorks timeline connector
 - `testimonials.rating` database check constraint
 
-## Deferred Infrastructure
+### Deferred Infrastructure
 
 - SHA pinning for GitHub Actions (ADR-006)
 - Re-evaluate route protection strategy if protected surface grows
 - Revisit transactions for E2E seed scripts if they become production-facing
+- Evaluate splitting ADRs into `docs/decisions/` as the ADR count grows
 
-## Known Issues
+### Known Issues
 
 Current npm audit vulnerabilities remain deferred:
 
@@ -691,25 +823,25 @@ These affect development tooling only.
 
 ---
 
-# Force Multiplier
+## Force Multiplier
 
-## Completed
+### Completed
 
 - ✅ LinkedIn post — CI lockfile synchronization lesson
   - ~84 impressions
   - Demonstrated a real debugging story and lesson learned
 
-## Open
+### Open
 
-- [ ] Community write-up:
-  Docker non-root EACCES permission issue
+- [ ] Community write-up: Docker non-root EACCES permission issue
 
-  Goal:
-  Write and publish a Stack Overflow question + answer documenting the root cause and solution.
+Goal:
+
+Write and publish a Stack Overflow question + answer documenting the root cause and solution.
 
 ---
 
-# Environment Variables
+## Environment Variables
 
 ```env
 # App
@@ -731,11 +863,14 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
 # Development
 ALLOWED_DEV_ORIGIN=
+
+# AI
+OPENAI_API_KEY=
 ```
 
 ---
 
-# Mentorship Rules
+## Mentorship Rules
 
 - Own every line of code.
 - No `any`.
@@ -750,17 +885,30 @@ ALLOWED_DEV_ORIGIN=
 
 ---
 
-# Current Status
+## Current Status
 
-**Current Phase:** Phase 4 — Payments + AI 🔄
+**Current Phase:** Phase 4 — Payments + AI (Recommendation Engine) 🔄
 
-## Immediate Next Steps
+### Immediate Next Steps
 
-1. Integrate payment provider.
-2. Design payment and order flow.
-3. Begin Vercel AI SDK integration.
-4. Expand Playwright coverage alongside new user flows.
+1. Architect the recommendation route handler — pipeline order, candidate
+   query location, HTTP contract (status + body) per outcome, and where the
+   duplicate-robotId check lands.
+2. Build the candidate filtering/ranking query (top 15, ordered by budget
+   proximity, featured as tiebreaker).
+3. Integrate Vercel AI SDK (`streamObject`) using the finalized request/response
+   schemas and system prompt.
+4. Wire ADR-008's two-stage validation (schema, then business-rule) into the
+   route handler.
+5. Build the recommendation UI, including the dedicated empty/error state.
+6. Enable OpenAI billing (blocked — key created, no billing configured yet)
+   before the first live streaming test; set a hard spend cap immediately
+   once enabled.
+7. Implement real rate limiting (currently a stubbed placeholder gate) and
+   token logging — remaining Deliverable 7 criteria.
+8. Integrate payment provider.
+9. Expand Playwright coverage alongside new user flows.
 
 ---
 
-_Last updated after completion of Phase 3 (Authentication + Security)._
+_Last updated after beginning Phase 4 — AI Recommendation Engine._
