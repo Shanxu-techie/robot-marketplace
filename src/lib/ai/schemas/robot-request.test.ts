@@ -169,6 +169,23 @@ describe('recommendationRequestSchema', () => {
       expect(result.success).toBe(true)
     })
 
+    it('trims surrounding whitespace from useCase', () => {
+      const request = {
+        ...validRequest,
+        useCase: '   0123456789   ',
+      }
+
+      const result = recommendationRequestSchema.safeParse(request)
+
+      expect(result.success).toBe(true)
+
+      if (!result.success) {
+        throw new Error('Expected request to be valid')
+      }
+
+      expect(result.data.useCase).toBe('0123456789')
+    })
+
     it('rejects useCase below minimum length', () => {
       const request = {
         ...validRequest,
@@ -234,6 +251,32 @@ describe('recommendationRequestSchema', () => {
       }
       const result = recommendationRequestSchema.safeParse(request)
       expect(result.success).toBe(false)
+    })
+
+    it('rejects whitespace-only payload after trimming', () => {
+      const request = {
+        ...validRequest,
+        payload: '   ',
+      }
+      const result = recommendationRequestSchema.safeParse(request)
+      expect(result.success).toBe(false)
+    })
+
+    it('trims surrounding whitespace from payload', () => {
+      const request = {
+        ...validRequest,
+        payload: '   0123456789   ',
+      }
+
+      const result = recommendationRequestSchema.safeParse(request)
+
+      expect(result.success).toBe(true)
+
+      if (!result.success) {
+        throw new Error('Expected request to be valid')
+      }
+
+      expect(result.data.payload).toBe('0123456789')
     })
 
     it('rejects payload above maximum length', () => {
