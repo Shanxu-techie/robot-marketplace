@@ -168,20 +168,24 @@ GitHub Actions workflow:
 
 #### Performance
 
-Composite partial index (pending):
+Composite partial index:
 
-```sql
-(category_id, featured)
-WHERE is_visible = true
-```
+\```sql
+CREATE INDEX "idx_robots_category_featured"
+ON "robots" USING btree ("category_id","featured")
+WHERE "robots"."is_visible" = true;
+\```
 
-Planned optimization for:
+Optimized for:
 
 - Category filtering
 - Featured filtering
 - Visible robots only
 
-> **Status:** Not yet merged into `main`. Being rebuilt in a replacement PR after the original branch became stale following the schema modularization.
+Applied via migration `0005_lively_thunderbolts.sql`. Verified directly
+against the database (`pg_indexes`) after resolving local index drift left
+over from the original stale branch. Index-creation strategy (standard
+`CREATE INDEX` rather than `CONCURRENTLY`) documented in ADR-009.
 
 #### Engineering Decisions
 
