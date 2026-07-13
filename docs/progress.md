@@ -168,18 +168,20 @@ GitHub Actions workflow:
 
 #### Performance
 
-Composite partial index:
+Composite partial index (pending):
 
 ```sql
 (category_id, featured)
 WHERE is_visible = true
 ```
 
-Optimized for:
+Planned optimization for:
 
 - Category filtering
 - Featured filtering
 - Visible robots only
+
+> **Status:** Not yet merged into `main`. Being rebuilt in a replacement PR after the original branch became stale following the schema modularization.
 
 #### Engineering Decisions
 
