@@ -1,0 +1,1 @@
+CREATE INDEX "idx_robots_category_featured" ON "robots" USING btree ("category_id","featured") WHERE "robots"."is_visible" = true;
