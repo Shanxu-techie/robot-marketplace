@@ -705,11 +705,21 @@ Additional business validation rules may be introduced alongside candidate-set v
   - Model/provider errors
   - AI-specific telemetry
 
-  Avoid introducing separate logging mechanisms for individual AI features.
+Avoid introducing separate logging mechanisms for individual AI features.
 
 ---
 
-## Recommendation Ranking Strategy
+### Environment Filtering
+
+- **Environment is currently recommendation context, not a database filter.** Although `environment` is collected as a required input, the current robot catalog does not persist an environment attribute. The value is therefore forwarded to the LLM as required contextual information rather than participating in SQL candidate filtering.
+
+This intentionally separates **business importance** from **database enforceability**: `environment` remains required because it materially affects recommendation quality, even though the current schema cannot filter on it.
+
+**Review Trigger:** Revisit when robot environment becomes a structured catalog attribute or specification normalization enables SQL-based environment filtering.
+
+---
+
+### Recommendation Ranking Strategy
 
 Current recommendation pipeline limits the candidate set (top 15) before sending robots to the LLM.
 
@@ -718,7 +728,11 @@ Current ordering:
 1. Closest price to the user's budget
 2. Featured robots (tie-breaker)
 
-**Design Hypothesis**
+- **Budget input evolution:** The current ranking strategy assumes a single target budget and orders candidates by proximity before sending them to the LLM. If the recommendation UI changes to collect budgets as ranges (for example, "Under $5,000", "$5,000–10,000", or "Over $10,000") rather than a single value, both the ranking algorithm and the AI request contract should be revisited together to ensure candidate selection still reflects user intent.
+
+**Review Trigger:** Re-evaluate when the recommendation UI replaces a single budget value with budget ranges or bracket-based input.
+
+#### Design Hypothesis
 
 Ordering primarily by budget proximity may bias recommendations toward mid-range robots while burying lower-cost robots that better satisfy the user's overall requirements.
 
@@ -772,6 +786,7 @@ Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
 ## Phase 4
 
 - Graceful degradation and fail-fast are different failure strategies. Recommendation validation filters individual invalid recommendations and only fails once no trustworthy recommendations remain.
+- Operating environment can be a required recommendation constraint even when it cannot yet participate in SQL filtering. Business importance and database enforceability are separate concerns.
 
 ---
 
@@ -788,6 +803,7 @@ Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
 - SHA pinning for GitHub Actions (ADR-006)
 - Re-evaluate route protection strategy if protected surface grows
 - Revisit transactions for E2E seed scripts if they become production-facing
+- Evaluate splitting ADRs into `docs/decisions/` as the ADR count grows
 
 ## Known Issues
 
@@ -844,6 +860,9 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
 # Development
 ALLOWED_DEV_ORIGIN=
+
+# AI
+OPENAI_API_KEY=
 ```
 
 ---
@@ -863,17 +882,30 @@ ALLOWED_DEV_ORIGIN=
 
 ---
 
-# Current Status
+## Current Status
 
 **Current Phase:** Phase 4 — Payments + AI (Recommendation Engine) 🔄
 
-## Immediate Next Steps
+### Immediate Next Steps
 
-1. Integrate payment provider.
-2. Design payment and order flow.
-3. Begin Vercel AI SDK integration.
-4. Expand Playwright coverage alongside new user flows.
+1. Architect the recommendation route handler — pipeline order, candidate
+   query location, HTTP contract (status + body) per outcome, and where the
+   duplicate-robotId check lands.
+2. Build the candidate filtering/ranking query (top 15, ordered by budget
+   proximity, featured as tiebreaker).
+3. Integrate Vercel AI SDK (`streamObject`) using the finalized request/response
+   schemas and system prompt.
+4. Wire ADR-008's two-stage validation (schema, then business-rule) into the
+   route handler.
+5. Build the recommendation UI, including the dedicated empty/error state.
+6. Enable OpenAI billing (blocked — key created, no billing configured yet)
+   before the first live streaming test; set a hard spend cap immediately
+   once enabled.
+7. Implement real rate limiting (currently a stubbed placeholder gate) and
+   token logging — remaining Deliverable 7 criteria.
+8. Integrate payment provider.
+9. Expand Playwright coverage alongside new user flows.
 
 ---
 
-_Last updated after completion of Phase 3 (Authentication + Security)._
+_Last updated after beginning Phase 4 — AI Recommendation Engine._
