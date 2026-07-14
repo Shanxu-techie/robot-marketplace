@@ -2,9 +2,11 @@ import { z } from 'zod'
 
 export const recommendationSchema = z.object({
   robotId: z
-    .uuid()
+    .number()
+    .int()
+    .positive()
     .describe(
-      'The UUID of one of the provided candidate robots. It must match the ID of a robot from the candidate list and must not be invented.'
+      'The integer ID of one of the provided candidate robots. It must match the ID of a robot from the candidate list and must not be invented.'
     ),
   matchScore: z
     .int()

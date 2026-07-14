@@ -5,7 +5,7 @@ import {
 } from './robot-recommendation'
 
 const validRecommendation = {
-  robotId: '550e8400-e29b-41d4-a716-446655440000',
+  robotId: 1,
   reason: "This robot closely matches the user's requirements.",
   matchScore: 85,
 }
@@ -14,12 +14,42 @@ describe('recommendationSchema', () => {
     const result = recommendationSchema.safeParse(validRecommendation)
     expect(result.success).toBe(true)
   })
-  it('rejects an invalid UUID', () => {
+  it('rejects an invalid ID', () => {
     const recommendation = {
       ...validRecommendation,
-      robotId: 'abc123',
+      robotId: -1,
     }
     const result = recommendationSchema.safeParse(recommendation)
+    expect(result.success).toBe(false)
+  })
+  it('rejects a decimal robot ID', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: 1.5,
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
+    expect(result.success).toBe(false)
+  })
+  it('rejects a robot ID of 0', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: 0,
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
+    expect(result.success).toBe(false)
+  })
+  it('rejects a string robot ID', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: '1',
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
     expect(result.success).toBe(false)
   })
   it('rejects an empty reason', () => {
@@ -166,7 +196,7 @@ describe('recommendationResponseSchema', () => {
       recommendations: [
         {
           ...validRecommendation,
-          robotId: 'invalid-uuid',
+          robotId: -1,
         },
       ],
     }
