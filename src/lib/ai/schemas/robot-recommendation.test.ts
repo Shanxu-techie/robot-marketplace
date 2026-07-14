@@ -5,7 +5,7 @@ import {
 } from './robot-recommendation'
 
 const validRecommendation = {
-  robotId: '550e8400-e29b-41d4-a716-446655440000',
+  robotId: 1,
   reason: "This robot closely matches the user's requirements.",
   matchScore: 85,
 }
@@ -14,12 +14,42 @@ describe('recommendationSchema', () => {
     const result = recommendationSchema.safeParse(validRecommendation)
     expect(result.success).toBe(true)
   })
-  it('rejects an invalid UUID', () => {
+  it('rejects an invalid ID', () => {
     const recommendation = {
       ...validRecommendation,
-      robotId: 'abc123',
+      robotId: -1,
     }
     const result = recommendationSchema.safeParse(recommendation)
+    expect(result.success).toBe(false)
+  })
+  it('rejects a decimal robot ID', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: 1.5,
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
+    expect(result.success).toBe(false)
+  })
+  it('rejects a robot ID of 0', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: 0,
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
+    expect(result.success).toBe(false)
+  })
+  it('rejects a string robot ID', () => {
+    const recommendation = {
+      ...validRecommendation,
+      robotId: '1',
+    }
+
+    const result = recommendationSchema.safeParse(recommendation)
+
     expect(result.success).toBe(false)
   })
   it('rejects an empty reason', () => {
@@ -121,28 +151,33 @@ describe('recommendationResponseSchema', () => {
   })
   it('rejects more than three recommendations', () => {
     const response = {
-      ...validResponse,
       recommendations: [
         validRecommendation,
-        validRecommendation,
-        validRecommendation,
-        validRecommendation,
+        { ...validRecommendation, robotId: 2 },
+        { ...validRecommendation, robotId: 3 },
+        { ...validRecommendation, robotId: 4 },
       ],
     }
     const result = recommendationResponseSchema.safeParse(response)
     expect(result.success).toBe(false)
   })
-  it('accepts three recommendations', () => {
+  it('accepts three recommendations with distinct robot IDs', () => {
     const response = {
-      ...validResponse,
       recommendations: [
         validRecommendation,
-        validRecommendation,
-        validRecommendation,
+        { ...validRecommendation, robotId: 2 },
+        { ...validRecommendation, robotId: 3 },
       ],
     }
     const result = recommendationResponseSchema.safeParse(response)
     expect(result.success).toBe(true)
+  })
+  it('rejects duplicate robot IDs', () => {
+    const response = {
+      recommendations: [validRecommendation, { ...validRecommendation }],
+    }
+    const result = recommendationResponseSchema.safeParse(response)
+    expect(result.success).toBe(false)
   })
   it('rejects a response missing a required field', () => {
     const recommendation = {
@@ -166,7 +201,7 @@ describe('recommendationResponseSchema', () => {
       recommendations: [
         {
           ...validRecommendation,
-          robotId: 'invalid-uuid',
+          robotId: -1,
         },
       ],
     }
