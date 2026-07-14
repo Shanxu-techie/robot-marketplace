@@ -151,28 +151,33 @@ describe('recommendationResponseSchema', () => {
   })
   it('rejects more than three recommendations', () => {
     const response = {
-      ...validResponse,
       recommendations: [
         validRecommendation,
-        validRecommendation,
-        validRecommendation,
-        validRecommendation,
+        { ...validRecommendation, robotId: 2 },
+        { ...validRecommendation, robotId: 3 },
+        { ...validRecommendation, robotId: 4 },
       ],
     }
     const result = recommendationResponseSchema.safeParse(response)
     expect(result.success).toBe(false)
   })
-  it('accepts three recommendations', () => {
+  it('accepts three recommendations with distinct robot IDs', () => {
     const response = {
-      ...validResponse,
       recommendations: [
         validRecommendation,
-        validRecommendation,
-        validRecommendation,
+        { ...validRecommendation, robotId: 2 },
+        { ...validRecommendation, robotId: 3 },
       ],
     }
     const result = recommendationResponseSchema.safeParse(response)
     expect(result.success).toBe(true)
+  })
+  it('rejects duplicate robot IDs', () => {
+    const response = {
+      recommendations: [validRecommendation, { ...validRecommendation }],
+    }
+    const result = recommendationResponseSchema.safeParse(response)
+    expect(result.success).toBe(false)
   })
   it('rejects a response missing a required field', () => {
     const recommendation = {

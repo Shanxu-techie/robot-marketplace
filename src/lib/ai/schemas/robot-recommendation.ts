@@ -24,15 +24,26 @@ export const recommendationSchema = z.object({
     ),
 })
 
-export const recommendationResponseSchema = z.object({
-  recommendations: z
-    .array(recommendationSchema)
-    .max(3)
-    .min(1)
-    .describe(
-      'A ranked list of one to three recommended robots ordered from best match to lowest match.'
-    ),
-})
+export const recommendationResponseSchema = z
+  .object({
+    recommendations: z
+      .array(recommendationSchema)
+      .max(3)
+      .min(1)
+      .describe(
+        'A ranked list of one to three recommended robots ordered from best match to lowest match.'
+      ),
+  })
+  .refine(
+    ({ recommendations }) => {
+      const robotIds = recommendations.map(({ robotId }) => robotId)
+      return robotIds.length === new Set(robotIds).size
+    },
+    {
+      message: 'Recommendations must not contain duplicate robot IDs.',
+      path: ['recommendations'],
+    }
+  )
 
 export type RecommendationResponse = z.infer<
   typeof recommendationResponseSchema
