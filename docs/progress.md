@@ -857,6 +857,7 @@ Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
 - `specification_definitions` normalization table
 - HowItWorks timeline connector
 - `testimonials.rating` database check constraint
+- **Catalog pricing constraints:** Evaluate making `robots.priceFrom` and `robots.priceTo` `NOT NULL`. Budget-aware recommendation ranking assumes priced catalog robots, but enforcing this requires a schema migration, verification/backfill of existing data, and confirmation that unpriced catalog listings are not a supported business state.
 
 ### Deferred Infrastructure
 
