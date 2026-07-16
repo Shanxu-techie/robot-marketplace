@@ -781,6 +781,9 @@ Current ordering:
 
 1. Closest price to the user's budget
 2. Featured robots (tie-breaker)
+3. `robots.id` ascending (final deterministic tie-breaker, added after
+   integration tests surfaced nondeterministic ordering among robots tied
+   on both budget distance and featured status)
 
 - **Budget input evolution:** The current ranking strategy assumes a single target budget and orders candidates by proximity before sending them to the LLM. If the recommendation UI changes to collect budgets as ranges (for example, "Under $5,000", "$5,000–10,000", or "Over $10,000") rather than a single value, both the ranking algorithm and the AI request contract should be revisited together to ensure candidate selection still reflects user intent.
 
