@@ -12,7 +12,7 @@ Assign a \`matchScore\` between 0 and 100 for each recommendation, where:
 
 ## Candidate Data
 
-Each candidate robot includes its ID, name, price, relevant capabilities, key specifications, and intended use case. Base your ranking and reasoning only on these provided fields together with the user's stated requirements.
+Each candidate robot includes its ID, name, price range (priceFrom–priceTo), a key metric, an inferred use case, and a list of additional specifications describing its capabilities and payload capacity where available. Base your ranking and reasoning only on these provided fields together with the user's stated requirements.
 
 ## Decision Criteria
 
