@@ -867,8 +867,7 @@ Re-evaluate during Phase 5 using real recommendation and buyer behavior data.
 - SHA pinning for GitHub Actions (ADR-006)
 - Re-evaluate route protection strategy if protected surface grows
 - Revisit transactions for E2E seed scripts if they become production-facing
-- **Test database isolation is manual, not enforced:** `getDb()` reads `process.env.DATABASE_URL` directly with no environment-specific override; switching between dev and the `e2e-test` Neon branch currently relies on manually changing the value before and after test runs. A dedicated `.env.test.local` (or equivalent) should automate this before more database-touching tests are added.
-- **Vitest hook timeouts may leave orphaned test data:** Vitest hook timeouts against Neon's HTTP driver do not guarantee in-flight writes are cancelled; a timed-out `beforeAll` can leave orphaned, FK-dependent rows that block subsequent runs. Needs either a more generous `hookTimeout`, wrapping setup in a single transaction, or a standalone cleanup script — tracked alongside the dedicated test-env work.
+- **Test database isolation and hook timeouts are tracked in [#9](https://github.com/Shanxu-techie/robot-marketplace/issues/9):** fail-closed `DATABASE_URL` validation for Vitest, plus a single chosen mitigation for orphaned rows from timed-out hooks (generous `hookTimeout`, transaction wrapping, or standalone cleanup — one strategy, not left open). See issue for full acceptance criteria.
 - Evaluate splitting ADRs into `docs/decisions/` as the ADR count grows
 
 ### Known Issues
