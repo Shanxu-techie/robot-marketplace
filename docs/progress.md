@@ -951,23 +951,34 @@ OPENAI_API_KEY=
 
 ### Immediate Next Steps
 
-1. Architect the recommendation route handler — pipeline order, candidate
-   query location, HTTP contract (status + body) per outcome, and where the
-   duplicate-robotId check lands.
-2. Build the candidate filtering/ranking query (top 15, ordered by budget
-   proximity, featured as tiebreaker).
+1. Verify how `robotId` is serialized into the prompt sent to the LLM
+   (JSON number vs. string-interpolated) — flagged during route-handler
+   architecture, not yet confirmed. Must be resolved before the prompt
+   builder is considered complete, since a mismatch would cause every
+   correct LLM response to fail the corrected `z.number()` schema.
+2. Build `buildRecommendationPrompt()` — assemble the finalized system
+   prompt with the validated request and the candidate set returned by
+   `getRecommendationCandidates()`.
 3. Integrate Vercel AI SDK (`streamObject`) using the finalized request/response
    schemas and system prompt.
 4. Wire ADR-008's two-stage validation (schema, then business-rule) into the
    route handler.
-5. Build the recommendation UI, including the dedicated empty/error state.
-6. Enable OpenAI billing (blocked — key created, no billing configured yet)
+5. Implement the route handler's rate-limit gate as a named, visible stub
+   (`checkRateLimitStub()`) — loud `console.warn` on every call, a
+   `// TODO(rate-limit):` comment at the call site, and this line item —
+   so it can't be silently mistaken for real enforcement. Real IP-keyed
+   rate limiting is tracked as a separate, later task.
+6. Build the recommendation UI, including the dedicated empty/error state.
+7. Enable OpenAI billing (blocked — key created, no billing configured yet)
    before the first live streaming test; set a hard spend cap immediately
    once enabled.
-7. Implement real rate limiting (currently a stubbed placeholder gate) and
+8. Implement real IP-keyed rate limiting (replacing the stub above) and
    token logging — remaining Deliverable 7 criteria.
-8. Integrate payment provider.
-9. Expand Playwright coverage alongside new user flows.
+9. Set up an NVIDIA NIM developer account and API key when the dev-provider
+   integration (ADR-010) is actually implemented; add the key to
+   `.env.example` at that time, not before.
+10. Integrate payment provider.
+11. Expand Playwright coverage alongside new user flows.
 
 ---
 
