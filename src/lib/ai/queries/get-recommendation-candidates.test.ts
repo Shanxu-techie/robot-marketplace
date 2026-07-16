@@ -113,11 +113,26 @@ describe('getRecommendationCandidates', () => {
 
     robotIds = insertedRobots.map((robot) => robot.id)
 
-    await db.insert(robotSpecifications).values({
-      robotId: robotIds[0],
-      label: 'Use Case',
-      value: 'Warehouse automation',
-    })
+    await db.insert(robotSpecifications).values([
+      {
+        robotId: robotIds[0],
+        label: 'Payload',
+        value: '100 kg',
+        sortOrder: 2,
+      },
+      {
+        robotId: robotIds[0],
+        label: 'Use Case',
+        value: 'Warehouse automation',
+        sortOrder: 1,
+      },
+      {
+        robotId: robotIds[0],
+        label: 'Battery',
+        value: '8 hours',
+        sortOrder: 3,
+      },
+    ])
   })
 
   afterAll(async () => {
@@ -333,5 +348,43 @@ describe('getRecommendationCandidates', () => {
     expect(nonFeaturedIndex).toBeGreaterThanOrEqual(0)
 
     expect(featuredIndex).toBeLessThan(nonFeaturedIndex)
+  })
+
+  it('returns populated specification data in sort order', async () => {
+    const candidates = await getRecommendationCandidates({
+      categoryId,
+      budget: 15000,
+      environment: 'indoor',
+      useCase: 'Warehouse automation testing',
+    })
+
+    const robot = candidates.find(
+      (candidate) => candidate.name === 'Inside Budget Robot'
+    )
+
+    expect(robot).toBeDefined()
+
+    expect(robot?.useCase).toBe('Warehouse automation')
+
+    expect(robot?.priceFrom).toBe(10000)
+    expect(robot?.priceTo).toBe(20000)
+
+    expect(typeof robot?.priceFrom).toBe('number')
+    expect(typeof robot?.priceTo).toBe('number')
+
+    expect(robot?.specifications).toEqual([
+      {
+        label: 'Use Case',
+        value: 'Warehouse automation',
+      },
+      {
+        label: 'Payload',
+        value: '100 kg',
+      },
+      {
+        label: 'Battery',
+        value: '8 hours',
+      },
+    ])
   })
 })

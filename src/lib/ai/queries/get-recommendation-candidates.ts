@@ -39,6 +39,7 @@ export async function getRecommendationCandidates(
       specifications: sql<{ label: string; value: string }[]>`COALESCE(
           json_agg(
             json_build_object('label', ${robotSpecifications.label}, 'value', ${robotSpecifications.value})
+            ORDER BY ${robotSpecifications.sortOrder}
           ) FILTER (WHERE ${robotSpecifications.id} IS NOT NULL),
           '[]'
         )`,
