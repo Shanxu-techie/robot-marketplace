@@ -3,7 +3,7 @@ import { RecommendationRequest } from '../schemas/robot-request'
 import { robots, robotSpecifications } from '@/db/schema'
 import { eq, and, asc, desc, sql, isNotNull } from 'drizzle-orm'
 
-type RecommendationCandidate = {
+export type RecommendationCandidate = {
   id: number
   name: string
   priceFrom: number
