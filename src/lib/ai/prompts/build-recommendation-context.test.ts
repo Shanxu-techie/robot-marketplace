@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { RecommendationRequest } from '../schemas/robot-request'
-import { RecommendationCandidate } from '../queries/get-recommendation-candidates'
+import type { RecommendationRequest } from '../schemas/robot-request'
+import type { RecommendationCandidate } from '../queries/get-recommendation-candidates'
 import { buildRecommendationContext } from './build-recommendation-context'
 
 describe('buildRecommendationContext', () => {

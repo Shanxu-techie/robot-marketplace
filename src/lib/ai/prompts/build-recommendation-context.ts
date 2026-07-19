@@ -1,5 +1,5 @@
-import { RecommendationCandidate } from '../queries/get-recommendation-candidates'
-import { RecommendationRequest } from '../schemas/robot-request'
+import type { RecommendationCandidate } from '../queries/get-recommendation-candidates'
+import type { RecommendationRequest } from '../schemas/robot-request'
 
 export function buildRecommendationContext(
   request: RecommendationRequest,
