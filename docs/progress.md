@@ -887,19 +887,7 @@ These affect development tooling only.
 
 ## Force Multiplier
 
-### Completed
-
-- ✅ LinkedIn post — CI lockfile synchronization lesson
-  - ~84 impressions
-  - Demonstrated a real debugging story and lesson learned
-
-### Open
-
-- [ ] Community write-up: Docker non-root EACCES permission issue
-
-Goal:
-
-Write and publish a Stack Overflow question + answer documenting the root cause and solution.
+See `docs/force-multiplier.md` — 8 artifacts published (2 Discord, 5 LinkedIn, 1 Stack Overflow), 0 open items, as of 2026-07-20.
 
 ---
 
